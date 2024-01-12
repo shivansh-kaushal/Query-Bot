@@ -5,6 +5,8 @@ Title: ChatBot impersonating 3 different personas built using flask and OpenAI
 Desciption:
 This project uses the OpenAI chat model API to communicate with humans. This project uses zero-shot prompting. The model has been explained to work like a particular personality based on the nature of the question asked. I have used 2 API calls: The first one to classify the question into a particular personality and the second one to to follow the behaviour and answer the actual query in the classified way and the category that model has classsified is also mentioned in the response. The model can only take in 4000 characters and prompt injections have also been taken care of using prompting. The project uses flask for building the interface. The interface looks something like this:
 
+
+
 Usage:
 This project can be directly used in command line interface(CLI) with the following command:
 python3 app.py
