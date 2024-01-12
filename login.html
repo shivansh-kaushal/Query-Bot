@@ -1,0 +1,38 @@
+<!-- templates/login.html-->
+
+<html>
+
+<head>
+	<title>Query_Bot</title>
+	<style>
+		div {
+			width: 100%;
+			heigth: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 5px;
+			text-align: center;
+			background-color:#c9daf5;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1 style="height:100vh; border-left: 10px #c9daf5;">QUERY BOT</h1>
+		<div style="position:fixed; bottom:0; margin-bottom:50px">
+		<form method="POST"
+			action="{{ url_for('handle_post') }}">
+			<input type="text"
+				name="Query"
+				placeholder="Type your query" 
+				maxlength="4000">
+			<button type="submit">SUBMIT</button>
+		</form>
+		</div>
+	</div>
+</body>
+
+</html>
+
+
