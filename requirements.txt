@@ -1,6 +1,0 @@
-langchain
-langchain-openai
-flask
-sys
-python-dotenv
-openai
