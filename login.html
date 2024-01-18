@@ -4,31 +4,36 @@
 
 <head>
 	<title>Query_Bot</title>
-	<style>
-		div {
-			width: 100%;
-			heigth: 100%;
-			margin-left: auto;
-			margin-right: auto;
-			padding: 5px;
-			text-align: center;
-			background-color:#c9daf5;
-		}
-	</style>
+	<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 
 <body>
 	<div>
-		<h1 style="height:100vh; border-left: 10px #c9daf5;">QUERY BOT</h1>
-		<div style="position:fixed; bottom:0; margin-bottom:50px">
-		<form method="POST"
-			action="{{ url_for('handle_post') }}">
-			<input type="text"
-				name="Query"
-				placeholder="Type your query" 
-				maxlength="4000">
-			<button type="submit">SUBMIT</button>
-		</form>
+		<h1 >QUERY BOT</h1>
+		<div class='history'>
+			<form method="post" action="{{ url_for('new_chat') }}">
+				<button type = "submit" name="history" id="history" value="new_chat">New chat</button>
+			</form>
+			History
+		</div>
+		<div class = 'Answer'>{{result|safe}}</div>
+		<div>
+			<lable for="assistant"> Select who you want to chat with:</label>
+			<form method="post" action="{{ url_for('handle_assistant') }}">
+				<select name="assistant" id="assistant">
+					<option value="HR">HR</option>
+					<option value="Professional Developer">Professional Developer</option>
+					<option value="Business Coach">Business Coach</option>
+				</select>
+			<form><br>
+				
+			<form method="POST" action="{{ url_for('handle_post') }}">
+				<input type="text"
+					name="Query"
+					placeholder="Type your query" 
+					maxlength="4000">
+				<button type="submit">SUBMIT</button>
+			</form>
 		</div>
 	</div>
 </body>
