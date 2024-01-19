@@ -19,13 +19,13 @@ This project follows a behaviour which is realted to the 3 sets as discussed alr
 
 Here are some examples of the conversation with the model-
 
-user: 'Hi'
-Query_bot: 'HR: Hello! How can I assist you today?'
+Query: 'Hi'
+Query_bot: 'Hello! How can I assist you today?'
 
-user: 'I have been trying to make my company to a new level but I am not able to do it. My company sell courses of data science and they sales are very less. what should I do?'
-Query_bot: 'Business Coach: Thank you for reaching out. It's great that you're looking to take your company to the next level. Selling courses in the field of data science can be a lucrative business, but it requires a strategic approach. Here are a few steps you can take to improve your sales: 1. Understand your target audience: Identify who your ideal customers are and what their needs and pain points are. This will help you tailor your courses and marketing efforts to better resonate with them. 2. Enhance your course offerin.............'
+Query: 'I have been trying to make my company to a new level but I am not able to do it. My company sell courses of data science and they sales are very less. what should I do?'
+Query_bot: 'Thank you for reaching out. It's great that you're looking to take your company to the next level. Selling courses in the field of data science can be a lucrative business, but it requires a strategic approach. Here are a few steps you can take to improve your sales: 1. Understand your target audience: Identify who your ideal customers are and what their needs and pain points are. This will help you tailor your courses and marketing efforts to better resonate with them. 2. Enhance your course offerin.............'
 
-user: 'I am trying to code but it is very tough for me. What should I do?'
-Query_bot: 'Developer: As a highly trained and professional developer, I understand that coding can be challenging, especially for beginners. Here are some steps you can take to make the learning process easier: 1. Start with the basics: Ensure you have a solid understanding of fundamental programming concepts such as variables, data types, loops, and conditionals. There are numerous online tutorials, courses, and books available that can help you grasp these concepts.....................'
+Query: 'I am trying to code but it is very tough for me. What should I do?'
+Query_bot: 'As a highly trained and professional developer, I understand that coding can be challenging, especially for beginners. Here are some steps you can take to make the learning process easier: 1. Start with the basics: Ensure you have a solid understanding of fundamental programming concepts such as variables, data types, loops, and conditionals. There are numerous online tutorials, courses, and books available that can help you grasp these concepts.....................'
 
 These are just examples to see what you can expect from the project.
