@@ -1,24 +1,24 @@
 div { width: 100%; heigth: 100%; margin-left: auto; margin-right: auto; padding: 5px; text-align: center;}
-h1 {border-left: 10px #848587; font-size:40px;}
+h1 {border-left: 10px #848587; font-size:40px; margin-left:14%;}
 div div{ position:fixed; bottom:0;}
-input {width:50%; font-size: 30px;}
-#assistant {margin-bottom:100px;}
+input {width:70%; font-size: 30px; margin-left:15%;}
+#assistant {margin-bottom:100px; margin-left:10%; margin-top:1%;}
 .history {position:fixed; left:0; width:20%; height:100%; background-color:#000000; border-right:5px; color:white; font-size: 40px;}
 select {font-size:20px;}
-lable {font-size:40px;}
-#history {color:white; font-size:20px; width:90%; margin:10px; background-color:#31f57f; height: 5%;}
-
+lable {font-size:40px; margin-left:8%}
+#history {color:white; font-size:20px; width:90%; margin:10px; background-color:#31f57f; height: 5%; position:unset;}
+#histories {color:white; font-size:20px; width:90%; margin:10px; background-color:#31f57f; height: 5%; position:unset;}
 .Answer {
-  width: 60%;
-  height: 50%;
+  width: 62%;
+  height: 40%;
   border: 1px solid black; 
   display: flex;
   align-items: stretch;
   flex: 1;
-  flex-direction: column;
   overflow-y: scroll;
-  margin-bottom:18%;
+  margin-bottom:21%;
   margin-left:28%;
   font-size: 15px;
+  flex-direction: column-reverse;
   }
 

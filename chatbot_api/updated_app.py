@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, jsonify, Response
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain.schema.messages import HumanMessage, SystemMessage
@@ -8,7 +8,8 @@ from langchain_core.output_parsers import StrOutputParser
 import openai
 from langchain.memory import ConversationSummaryMemory, ChatMessageHistory
 from langchain_openai import OpenAI
-from flask import jsonify
+from langchain.memory import ConversationSummaryMemory, ChatMessageHistory
+from langchain_openai import OpenAI
 
 from dotenv import load_dotenv, find_dotenv
 _ = load_dotenv(find_dotenv('key.env')) # read local .env file
@@ -29,8 +30,6 @@ def Chatbot(path, trait, query):
 	from langchain.chat_models import ChatOpenAI
 	chat = ChatOpenAI(temperature = 0, openai_api_key = openai.api_key, model='gpt-3.5-turbo')
 	
-	# hist = memory.load_memory_variables({})
-	# hist = [-300:]
 	# feeding the context, prompt injection and query to the model
 	with open(path, 'r') as file:
 		fyl = file.read()
@@ -40,9 +39,6 @@ def Chatbot(path, trait, query):
 	    HumanMessage(content = query),
 	]
 	response = chat.invoke(messages)
-		
-	# memory = ConversationSummaryMemory(llm=OpenAI(temperature=0))
-	# memory.save_context({"input": query}, {"output": response.content})
 	
 	with open(path, 'a') as file:
 		file.write(f'<br>Query: {query} <br>')
@@ -51,7 +47,13 @@ def Chatbot(path, trait, query):
 	with open(path, 'r') as file:
 		fyl = file.read()
 		
-	return fyl
+	return generate_text(fyl, response.content)
+	
+def generate_text(existing, new):
+    data = new
+    for i in data:
+        time.sleep(1)  # Simulating some processing time
+        yield f"data from server {i}\n"
 
 
 app = Flask(__name__)
@@ -60,21 +62,29 @@ app = Flask(__name__)
 @app.route('/')
 def view_form():
 	return render_template('login.html')
+	
+@app.route('/extract_variable', methods=['POST'])
+def extract_variable():
+    data = request.data.decode('utf-8')
+    app.data = data[23:-2]
+    return jsonify(list(data))
 
 @app.route('/new_chat', methods=['POST'])
 def new_chat():
+	if getattr(app, 'data', None) is not None:
+		option = app.data
+	else:
+		print("Extracted data not available")
+	
+	if option == "HR":
+		path = '/home/hestabit/Downloads/Project_Inmemory/Chat_Histories/history_HR.txt'
+	elif option == "Professional Developer":
+	 	path = "/home/hestabit/Downloads/Project_Inmemory/Chat_Histories/history_Developer.txt"
+	else:
+		path = "/home/hestabit/Downloads/Project_Inmemory/Chat_Histories/history_Business_coach.txt"
 	if request.method == 'POST':
-		length = len(os.listdir('/home/hestabit/Downloads/Project_Inmemory/Chat_Histories'))
-		path = f'/home/hestabit/Downloads/Project_Inmemory/Chat_Histories/history_{length+1}.txt'
-		with open('/home/hestabit/Downloads/Project_Inmemory/Chat_Histories/history.txt', 'r') as file:
-			fyl = file.read()
-			
 		with open(path, 'w') as file:
-			file.write(fyl)
-			
-		with open('/home/hestabit/Downloads/Project_Inmemory/Chat_Histories/history.txt', 'w') as file:
 			file.write('')
-		
 		return render_template('login.html')
 		
 @app.route('/handle_assistant', methods=['POST'])
@@ -83,10 +93,14 @@ def handle_assistant():
 	if request.method == 'POST':
 		ast = request.form['assistant']
 		if ast == 'HR':
+			path = "/home/hestabit/Downloads/Project_Inmemory/Chat_Histories/history_HR.txt"
 			trait = define_hr
 		elif ast == 'Professional Developer':
+			path = "/home/hestabit/Downloads/Project_Inmemory/Chat_Histories/history_Developer.txt"
 			trait = define_developer
+			
 		else:
+			path = "/home/hestabit/Downloads/Project_Inmemory/Chat_Histories/history_Business_coach.txt"
 			trait =  define_business_coach
 		return handle_post(path, trait)
 
@@ -98,6 +112,10 @@ def handle_post(path, trait):
 			return render_template("login.html", result = Chatbot(path, trait, input_))
 		else:
 			return render_template("login.html", result = "Please provide input")
+
+@app.route('/stream')
+def stream():
+    return Response(generate_text(), content_type='text/event-stream')
 			
 if __name__ == '__main__':
 	app.run()
