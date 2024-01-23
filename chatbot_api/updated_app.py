@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, jsonify, Response
+from flask import Flask, render_template, request, redirect, session, jsonify
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from langchain.schema.messages import HumanMessage, SystemMessage
@@ -47,13 +47,7 @@ def Chatbot(path, trait, query):
 	with open(path, 'r') as file:
 		fyl = file.read()
 		
-	return generate_text(fyl, response.content)
-	
-def generate_text(existing, new):
-    data = new
-    for i in data:
-        time.sleep(1)  # Simulating some processing time
-        yield f"data from server {i}\n"
+	return response.content
 
 
 app = Flask(__name__)
@@ -68,6 +62,12 @@ def extract_variable():
     data = request.data.decode('utf-8')
     app.data = data[23:-2]
     return jsonify(list(data))
+    
+@app.route('/extract_query', methods=['POST'])
+def extract_query():
+    Query_string = request.data.decode('utf-8')
+    app.Query_string = Query_string[10:-2]
+    return jsonify(list(Query_string))
 
 @app.route('/new_chat', methods=['POST'])
 def new_chat():
@@ -89,9 +89,12 @@ def new_chat():
 		
 @app.route('/handle_assistant', methods=['POST'])
 def handle_assistant():
-	trait = ''
+	if getattr(app, 'data', None) is not None:
+		trait = app.data
+	else:
+		print("Extracted data not available")
+	ast = trait
 	if request.method == 'POST':
-		ast = request.form['assistant']
 		if ast == 'HR':
 			path = "/home/hestabit/Downloads/Project_Inmemory/Chat_Histories/history_HR.txt"
 			trait = define_hr
@@ -107,15 +110,15 @@ def handle_assistant():
 @app.route('/handle_post', methods=['POST'])
 def handle_post(path, trait):
 	if request.method == 'POST':
-		input_ = request.form['Query']
+		if getattr(app, 'data', None) is not None:
+			query = app.Query_string
+		else:
+			print("Extracted query not available")
+		input_ = query
 		if input_:
 			return render_template("login.html", result = Chatbot(path, trait, input_))
 		else:
 			return render_template("login.html", result = "Please provide input")
-
-@app.route('/stream')
-def stream():
-    return Response(generate_text(), content_type='text/event-stream')
 			
 if __name__ == '__main__':
 	app.run()

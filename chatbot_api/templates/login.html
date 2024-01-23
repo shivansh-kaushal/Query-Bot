@@ -11,38 +11,33 @@
 	<div>
 		<h1 >QUERY BOT</h1>
 		<div class="history">
-			<form method="get" action="{{ url_for('new_chat') }}">
+			<form method="post" action="{{ url_for('new_chat') }}">
 				<button type = "submit" name="history" id="history" value="new_chat">New chat</button>
 				<!-- <div id="histories">{{code|safe}}</div> -->
 			</form>
 			History
 			
 		</div>
-		<div class = "Answer" id="response-container">
-			<div id="existing-message">
-			{{result|safe}}
-			</div>
-		</div>
+			<div class="Answer" id= "text-data" data-text="{{result|safe}}"></div>
 		<div>
-			<lable for="assistant"> Select who you want to chat with:</label>
-			<form method="POST" action="{{ url_for('handle_assistant') }}">
+			<lable for="assistant"> Select who you want to chat with:</lable>
+			<form method="POST" action="{{ url_for('handle_assistant') }}" id="formSubmit"">
 				<select name="assistant" id="assistant" onchange="saveSelection()">
 					<option value="HR">HR</option>
 					<option value="Professional Developer">Professional Developer</option>
 					<option value="Business Coach">Business Coach</option>
 				</select>
-			<form><br>
-				
-			<form method="post" action="{{ url_for('handle_post') }}">
 				<input type="text"
 					name="Query"
 					placeholder="Type your query" 
-					maxlength="4000">
-				<button type="submit" id="submit">SUBMIT</button>
+					maxlength="4000"
+					id="query-text"
+					required>
+				<button type="button" id="submit" onclick="extractText()">SUBMIT</button>
 			</form>
 		</div>
 	</div>
-	<script src="{{url_for('static', filename='jscript.js')}}"></script> 
+	<script src="{{url_for('static', filename='jscript.js')}}"></script>
 </body>
 
 </html>
