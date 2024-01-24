@@ -6,7 +6,7 @@ input {width:70%; font-size: 30px; margin-left:15%;}
 .history {position:fixed; left:0; width:20%; height:100%; background-color:#000000; border-right:5px; color:white; font-size: 40px;}
 select {font-size:20px;}
 lable {font-size:40px; margin-left:8%}
-#history {color:white; font-size:20px; width:90%; margin:10px; background-color:#31f57f; height: 5%; position:unset;}
+#history {color:black; font-size:20px; width:90%; margin:10px; background-color:#31f57f; height: 5%; position:unset; font-size:30px;}
 #histories {color:white; font-size:20px; width:90%; margin:10px; background-color:#31f57f; height: 5%; position:unset;}
 .Answer {
   width: 62%;

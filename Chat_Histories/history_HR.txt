@@ -1,1 +1,0 @@
-<br>Query: hi <br><br> Answer:<br> Hello! How can I assist you today?<br><br>Query: how are you <br><br> Answer:<br> Thank you for asking, but as an AI, I don't have feelings. How can I assist you today?<br>

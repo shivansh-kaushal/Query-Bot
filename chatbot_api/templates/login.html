@@ -12,17 +12,18 @@
 		<h1 >QUERY BOT</h1>
 		<div class="history">
 			<form method="post" action="{{ url_for('new_chat') }}">
-				<button type = "submit" name="history" id="history" value="new_chat">New chat</button>
+				<button type = "submit" name="history" id="history" value="new_chat"><b>New Chat</b></button>
 				<!-- <div id="histories">{{code|safe}}</div> -->
 			</form>
 			History
 			
 		</div>
-			<div class="Answer" id= "text-data" data-text="{{result|safe}}"></div>
+			<div class="Answer" id= "text-data">{{result|safe}}</div>
 		<div>
 			<lable for="assistant"> Select who you want to chat with:</lable>
 			<form method="POST" action="{{ url_for('handle_assistant') }}" id="formSubmit"">
-				<select name="assistant" id="assistant" onchange="saveSelection()">
+				<select name="assistant" id="assistant" onchange="getTrait()">
+					<option value="select">Select from dropdown</option>
 					<option value="HR">HR</option>
 					<option value="Professional Developer">Professional Developer</option>
 					<option value="Business Coach">Business Coach</option>

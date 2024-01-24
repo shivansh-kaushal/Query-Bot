@@ -1,1 +1,0 @@
-<br>Query: hola <br><br> Answer:<br> Hola! ¿En qué puedo ayudarte hoy?<br><br>Query: hi <br><br> Answer:<br> Hola! ¿En qué puedo ayudarte hoy?<br>
